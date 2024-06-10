@@ -12,6 +12,8 @@ if (isset($_GET['nome_sala'])) {
   $query = "SELECT * FROM reservas WHERE nome_sala LIKE '%$nome_sala%' ORDER BY data_uso ASC";
 }
 $result = $conn->query($query);
+include 'css/reservas.php';
+include 'components/menu.php'
 ?>
 
 <!DOCTYPE html>
@@ -19,37 +21,23 @@ $result = $conn->query($query);
 
 <head>
   <title>Reservas</title>
+  <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 </head>
 
 <body>
-  <form method="GET" action="home.php">
-    <input type="text" name="nome_sala" placeholder="Nome da Sala">
-    <button type="submit">Buscar</button>
-  </form>
-  <table border="1">
-    <tr>
-      <th>Nome da Sala</th>
-      <th>Foto</th>
-      <th>Local</th>
-      <th>Data</th>
-      <th>Hora Início</th>
-      <th>Hora Fim</th>
-      <th>Responsável</th>
-    </tr>
-    <?php
-    while ($row = $result->fetch_assoc()) {
-      echo "<tr>";
-      echo "<td>" . $row['nome_sala'] . "</td>";
-      echo "<td><img src='" . $row['foto_sala'] . "' width='100'></td>";
-      echo "<td>" . $row['local_sala'] . "</td>";
-      echo "<td>" . $row['data_uso'] . "</td>";
-      echo "<td>" . $row['hora_inicio'] . "</td>";
-      echo "<td>" . $row['hora_fim'] . "</td>";
-      echo "<td>" . $row['responsavel'] . "</td>";
-      echo "</tr>";
-    }
-    ?>
-  </table>
+  <div id="tabela_juridico2"></div> <br>
+  <span class="loader" id="loader_relatorio" style="display: none;"></span>
 </body>
 
 </html>
+
+
+
+<script>
+  $(document).ready(() => {
+    document.getElementById('loader_relatorio').style.display = "inline-block";
+    $("#tabela_juridico2").load(`funcao/tabela_home.php`);
+  });
+</script>

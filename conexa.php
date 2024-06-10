@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "1979";
+$password = "";
 $dbname = "reserva_salas";
 
 // Criar conexão

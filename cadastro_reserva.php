@@ -35,6 +35,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Erro: " . $sql . "<br>" . $conn->error;
   }
 }
+
+
+include 'components/menu.php';
+include 'css/reservas.php';
 ?>
 
 <!DOCTYPE html>
