@@ -6,7 +6,7 @@
     padding: 0;
   }
 
-  form {
+  .form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,9 +40,9 @@
     padding: 3rem;
   }
 
-  form {
+  /* form {
     width: 100%;
-  }
+  } */
 
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
