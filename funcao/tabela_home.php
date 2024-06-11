@@ -23,7 +23,7 @@ for ($i = 0; $i < $columnCount; $i++) {
 //   echo "Nome da coluna: " . $columnName . "<br>";
 // }
 ?>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 <table id="segunda_tabela" class='table table-striped' cellspacing='0' cellpadding='0'>
   <thead>
@@ -41,9 +41,6 @@ for ($i = 0; $i < $columnCount; $i++) {
     while ($row = $result->fetch_assoc()) {
       echo '<tr>';
       foreach ($columns as $column) {
-        // if(){
-        // }
-        // echo $column;
         if ($column == 'foto_sala') {
           echo '<td style="text-align: center; background-color: white;"> <img  src=' . $row[$column] . ' width="200px" > </td>';
         } else {

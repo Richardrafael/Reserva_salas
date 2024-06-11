@@ -7,44 +7,63 @@ $senha = $_POST['password'];
 $password = md5($senha);
 
 $iserror = false;
+$error = "";
 
-$sql = "INSERT INTO usuarios (username, senha) VALUES ('$username', '$password')";
+// Verificar se o usuário já existe
+$checkSql = "SELECT COUNT(*) FROM usuarios WHERE username = ?";
+$stmt = mysqli_prepare($conn, $checkSql);
+mysqli_stmt_bind_param($stmt, 's', $username);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $count);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
 
-if (mysqli_query($conn, $sql)) {
-} else {
+if ($count > 0) {
   $iserror = true;
-  $error = 'Error ao cadastrar';
+  $error = "Usuário já existe. Escolha outro nome de usuário.";
+} else {
+  // Inserir novo usuário
+  $sql = "INSERT INTO usuarios (username, senha) VALUES (?, ?)";
+  $stmt = mysqli_prepare($conn, $sql);
+  if ($stmt) {
+    mysqli_stmt_bind_param($stmt, 'ss', $username, $password);
+    if (mysqli_stmt_execute($stmt)) {
+      // Sucesso
+    } else {
+      $iserror = true;
+      $error = "Erro ao cadastrar: " . mysqli_error($conn);
+    }
+    mysqli_stmt_close($stmt);
+  } else {
+    $iserror = true;
+    $error = "Erro na preparação da consulta: " . mysqli_error($conn);
+  }
 }
+
 $conn->close();
 ?>
 
 <body>
-  <div class="header">
-    <a href="index.php" class="botao-seta">
-      <i class="fa-regular fa-circle-left"></i>
-    </a>
-    <!-- <img class="logo" src="image/santacasa.png" alt="Santa Casa São José dos Campos" class="logowifi"> -->
-  </div>
   <?php if ($iserror) : ?>
     <div class="container-results">
       <span class="error">
-        <?= $error; ?>
+        <?php echo $error; ?>
       </span>
       <span class="volte">
         Volte e tente novamente
       </span>
-      <a class="btn" href="<?php echo $pagina ?>?id=<?php echo $_SESSION['id']; ?>&ap=<?php echo $_SESSION['ap']; ?>">
+      <a class="btn" href="cadastro_usuarios.php">
         Voltar
       </a>
     </div>
   <?php else : ?>
     <div class="container-results">
-      <span class="sucesso">Usuario Cadastrado com sucesso</span>
+      <span class="sucesso">Usuário cadastrado com sucesso</span>
       <span class="volte">
         Já pode iniciar suas reservas
       </span>
       <a class="btn" href="index.php">
-        Voltar
+        Login
       </a>
     </div>
   <?php endif; ?>

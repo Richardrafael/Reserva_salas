@@ -21,7 +21,7 @@
     width: 100vw;
     height: 90vh;
     display: flex;
-    /* justify-content: center;  */
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     overflow-x: hidden;

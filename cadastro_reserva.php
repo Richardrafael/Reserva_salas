@@ -49,19 +49,24 @@ include 'css/reservas.php';
 </head>
 
 <body>
-  <form method="POST" action="cadastro_reserva.php" enctype="multipart/form-data">
-    <input type="text" name="nome_sala" placeholder="Nome da Sala" required>
-    <input type="file" name="foto_sala">
-    <input type="text" name="local_sala" placeholder="Local da Sala" required>
-    <input type="date" name="data_uso" required>
-    <input type="time" name="hora_inicio" required>
-    <input type="time" name="hora_fim" required>
-    <input type="text" name="responsavel" placeholder="Responsável pelo uso" required>
-    <textarea name="motivo" placeholder="Motivo do uso"></textarea>
-    <textarea name="informacoes" placeholder="Informações adicionais"></textarea>
-    <textarea name="convidados" placeholder="Convidados"></textarea>
-    <button type="submit">Cadastrar Reserva</button>
-  </form>
+  <div class="container_1">
+    <h1>Cadastrar Reserva</h1>
+    <form class="form" method="POST" action="cadastro_reserva.php" enctype="multipart/form-data">
+      <input type="text" name="nome_sala" placeholder="Nome da Sala" required>
+      <span>addicione imagem da salas</span>
+      <input type="file" name="foto_sala">
+      <input type="text" name="local_sala" placeholder="Local da Sala" required>
+      <input type="date" name="data_uso" required>
+      <input type="time" name="hora_inicio" required>
+      <input type="time" name="hora_fim" required>
+      <input type="text" name="responsavel" placeholder="Responsável pelo uso" required>
+      <textarea name="motivo" placeholder="Motivo do uso"></textarea>
+      <textarea name="informacoes" placeholder="Informações adicionais"></textarea>
+      <textarea name="convidados" placeholder="Convidados"></textarea>
+      <button class="btn" type="submit">Cadastrar Reserva</button>
+    </form>
+  </div>
+
 </body>
 
 </html>

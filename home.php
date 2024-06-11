@@ -5,13 +5,6 @@ if (!isset($_SESSION['loggedin'])) {
   exit();
 }
 include 'conexa.php';
-
-$query = "SELECT * FROM reservas ORDER BY data_uso ASC";
-if (isset($_GET['nome_sala'])) {
-  $nome_sala = $_GET['nome_sala'];
-  $query = "SELECT * FROM reservas WHERE nome_sala LIKE '%$nome_sala%' ORDER BY data_uso ASC";
-}
-$result = $conn->query($query);
 include 'css/reservas.php';
 include 'components/menu.php'
 ?>
@@ -27,8 +20,11 @@ include 'components/menu.php'
 </head>
 
 <body>
-  <div id="tabela_juridico2"></div> <br>
-  <span class="loader" id="loader_relatorio" style="display: none;"></span>
+  <div class="container">
+    <div style="width: 90%;" id="tabela_juridico2"></div> <br>
+    <span class="loader" id="loader_relatorio" style="display: none;"></span>
+  </div>
+
 </body>
 
 </html>
