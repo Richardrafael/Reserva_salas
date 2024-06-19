@@ -20,9 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($_FILES['foto_sala']['name']) {
     $target_dir = "uploads/";
-    $target_file = $target_dir . basename($_FILES["foto_sala"]["name"]);
+    $unique_id = uniqid(); // Gera um ID único
+    $original_filename = basename($_FILES["foto_sala"]["name"]);
+    $file_extension = pathinfo($original_filename, PATHINFO_EXTENSION);
+    $target_file = $target_dir . $unique_id . '.' . $file_extension;
+
     if (move_uploaded_file($_FILES["foto_sala"]["tmp_name"], $target_file)) {
       $foto_sala = $target_file;
+    } else {
+      echo "Erro ao fazer upload da foto.";
     }
   }
 
@@ -35,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Erro: " . $sql . "<br>" . $conn->error;
   }
 }
-
 
 include 'components/menu.php';
 include 'css/reservas.php';
@@ -53,7 +58,7 @@ include 'css/reservas.php';
     <h1>Cadastrar Reserva</h1>
     <form class="form" method="POST" action="cadastro_reserva.php" enctype="multipart/form-data">
       <input type="text" name="nome_sala" placeholder="Nome da Sala" required>
-      <span>addicione imagem da salas</span>
+      <span>Adicione imagem da sala</span>
       <input type="file" name="foto_sala">
       <input type="text" name="local_sala" placeholder="Local da Sala" required>
       <input type="date" name="data_uso" required>
